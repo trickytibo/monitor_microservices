@@ -34,7 +34,7 @@ ALERT InstanceLowMemory
   }
 
 ALERT InstanceLowDisk  
-  IF node_filesystem_avail{mountpoint="/dev/vda1"} < 10737418240
+  IF sum(node_filesystem_avail{device="/dev/vda1"}) by (instance) < 10737418240
   FOR 10m  LABELS { severity = "critical" }
   ANNOTATIONS {
     summary = "Instance {{$labels.host}}: low disk space",
