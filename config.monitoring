@@ -4,5 +4,4 @@ DS_NAME=prometheus
 DS_TYPE=prometheus
 DS_ACCESS=proxy
 DS_URL=http://prometheus:9090
-dashboards.json.enabled=true
-dashboards.json.path=dashboards
+GF_JSON_DATA=./dashboards
