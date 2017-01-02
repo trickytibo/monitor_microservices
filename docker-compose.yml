@@ -37,7 +37,7 @@ services:
     container_name: node-exporter
     privileged: true
     command:
-      - '-web.listen-address=9101'
+      - '-web.listen-address=:9101'
     ports:
       - 9101:9101
     networks:
