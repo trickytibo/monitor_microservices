@@ -36,8 +36,10 @@ services:
     image: prom/node-exporter
     container_name: node-exporter
     privileged: true
+    command:
+      - '-web.listen-address=9101'
     ports:
-      - 9100:9100
+      - 9101:9101
     networks:
       - back-tier
 
