@@ -14,8 +14,9 @@ services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
+    privileged: true
     volumes:
-      - ./prometheus/:/etc/prometheus/
+      - ./prometheus:/etc/prometheus
       - prometheus_data:/prometheus
     command:
       - '-config.file=/etc/prometheus/prometheus.yml'
@@ -34,18 +35,22 @@ services:
   node-exporter:
     image: prom/node-exporter
     container_name: node-exporter
+    privileged: true
+    command:
+      - '-web.listen-address=:9101'
     ports:
-      - 9100:9100
+      - 9101:9101
     networks:
       - back-tier
 
   alertmanager:
     image: prom/alertmanager
     container_name: alertmanager
+    privileged: true
     ports:
       - 9093:9093
     volumes: 
-      - ./alertmanager/:/etc/alertmanager/
+      - ./alertmanager:/etc/alertmanager
     networks:
       - back-tier
     command:
@@ -71,6 +76,7 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
+    privileged: true
     restart: always
     depends_on:
       - prometheus
